@@ -1,0 +1,35 @@
+#include <iostream>
+#include <stdio.h>
+#include <time.h>       // for clock_t, clock(), CLOCKS_PER_SEC
+#include <unistd.h>
+using namespace std;
+
+int count=0;
+int count2=0;
+int mas[501]={1,1,1,1};
+int rec(int n){
+    count++;
+    if (n>0 && n<4) return 1;
+    else return (rec(n-2)+rec(n/2)*2)%10000;
+}
+
+int rec2(int n){
+    count2++;
+    if (mas[n]!=0){
+         return mas[n];
+    }
+    else{
+        mas[n]=(rec2(n-2)+rec2(n/2)*2)%10000;
+    }
+    return mas[n];
+}
+
+
+int main(){
+    int x;
+    cin>>x;
+    cout<<rec(x)<<" Значение функции 1"<<endl;
+    cout<<count<<" Заходов в рекурсию 1"<<endl;
+    cout<<rec2(x)<<" Значение функции 2"<<endl;
+    cout<<count2<<" Заходов в рекурсию 2";
+}
